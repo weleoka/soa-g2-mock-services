@@ -2,7 +2,7 @@
 
 Mock API services running on Node server for study project
 
-- WORK in PROGRESS -
+WORK in PROGRESS -
 
 
 
@@ -11,3 +11,6 @@ https://www.npmjs.com/package/json-server
 
 For making request from node services
 https://www.npmjs.com/package/axios
+
+For generating fake data
+https://www.npmjs.com/package/casual
