@@ -1,0 +1,15 @@
+# Ignore everything
+**
+
+# Allow certain files and directories
+!./src
+!./package*.json
+
+
+# Recommended ignores, but we've ignored everything anyhow
+.git
+node_modules
+npm-debug
+npm-debug.log
+Dockerfile
+.dockerignore

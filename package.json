@@ -1,0 +1,30 @@
+{
+  "name": "g2s_mock_services",
+  "version": "1.0.0",
+  "description": "Mock APIs for development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "json-server": "^0.16.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weleoka/g2s_mock_services.git"
+  },
+  "keywords": [
+    "nodejs",
+    "mock",
+    "api",
+    "development",
+    "studies"
+  ],
+  "author": "Kai Weeks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/weleoka/g2s_mock_services/issues"
+  },
+  "homepage": "https://github.com/weleoka/g2s_mock_services#readme"
+}
