@@ -30,7 +30,7 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 # Explicitly set the working dir
 WORKDIR /home/node/app
 
-# Dependencies listed in package.json, package-lock.json is copied too
+# Dependencies listed in package.json, package-lock.json is copied as well.
 COPY --chown=node:node ./package*.json ./
 
 # Switch to the Node user
@@ -45,7 +45,7 @@ COPY --chown=node:node ./src/ ./
 # This is here for documentation purposes, we map it to whatever port we wish later
 EXPOSE 8080
 
-# Run the app directly with Node so SIGTERM and SIGKILL works
+# Run the app directly with Node (not via NPM) so SIGTERM and SIGKILL works
 CMD ["node", "index.js"]
 #CMD ["bash"]
 #CMD ["bash"]
