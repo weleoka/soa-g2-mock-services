@@ -4,11 +4,10 @@
 # Allow certain files and directories
 !./src
 !./package*.json
-
+!./node_modules
 
 # Recommended ignores, but we've ignored everything anyhow
 .git
-node_modules
 npm-debug
 npm-debug.log
 Dockerfile

@@ -30,14 +30,18 @@ RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 # Explicitly set the working dir
 WORKDIR /home/node/app
 
-# Dependencies listed in package.json, package-lock.json is copied as well.
+# Dependencies listed in package.json
+# package-lock.json is copied as well, see readme for saving the changes to package-lock.json
 COPY --chown=node:node ./package*.json ./
+
+# See readme.md, but this will save on downloads if node modules have previously been saved to host.
+COPY --chown=node:node ./node_modules ./
 
 # Switch to the Node user
 USER node
 
-# Install app dependencies
-RUN npm install
+# Install app dependencies and silence the output of npm
+RUN npm install --quiet
 
 # Copy in the project files
 COPY --chown=node:node ./src/ ./
