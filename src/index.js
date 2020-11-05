@@ -1,15 +1,27 @@
-const jsonServer = require('json-server')
-const server = jsonServer.create()
-const db = require('./ladok/resultat')
-const router = jsonServer.router(db());
-const middlewares = jsonServer.defaults()
-const port = process.env.PORT || 8080
+const jsonServer = require('json-server');
+const server = jsonServer.create();
+const middlewares = jsonServer.defaults();
+const port = process.env.PORT || 8080;
 
+let db = {};
+const ladok_db = require('./ladok/resultat');
+const epok_db = require('./epok/modul');
+
+// Shallow merge using the spread operator
+db = {...ladok_db(), ...epok_db()};
+
+// debug the loaded data
+console.log(db);
+
+const router = jsonServer.router(db);
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
+
+
+//{"/api/v1/users/:appId/preferences": "/preferences/:appId"}
 server.use(router);
 
-//console.log(db());
+
 
 
 /* // The following are custom implementations of routes as examples.
