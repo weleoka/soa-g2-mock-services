@@ -2,8 +2,9 @@
 
 Mock API services running on Node server for study project
 
+See the API specifications for details on routes and resources. What we can say here is that the routes assume all the same domain for the three services StudentITS, LADOK, and EPOK. Calls to these apis are segregated using simple route mappings, whereas in reality it would belong under different domains.
+`localhost:8282/modul` is identical to `localhost:8282/epok/modul`.
 
-WORK in PROGRESS
 
 
 # Docker perticulars/perculiarities

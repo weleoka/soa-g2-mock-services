@@ -3,25 +3,27 @@ const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 8080;
 
-let db = {};
 const ladok_db = require('./ladok/resultat');
 const epok_db = require('./epok/modul');
+const studentits_db = require('./studentits/student');
 
-// Shallow merge using the spread operator
-db = {...ladok_db(), ...epok_db()};
-
+// Shallow merge using the spread operator all into one fake db.
+let db = {...ladok_db(), ...epok_db(), ...studentits_db()};
 // debug the loaded data
 console.log(db);
-
+// Auto-create the routes for json-server from our db.
 const router = jsonServer.router(db);
+
+// https://github.com/typicode/json-server/#rewriter-example
+server.use(jsonServer.rewriter({
+    "/ladok/*": "/$1",
+    "/epok/*": "/$1",
+    "/studentits/*": "/$1"
+}))
+
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
-
-
-//{"/api/v1/users/:appId/preferences": "/preferences/:appId"}
 server.use(router);
-
-
 
 
 /* // The following are custom implementations of routes as examples.
