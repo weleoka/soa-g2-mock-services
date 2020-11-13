@@ -10,7 +10,7 @@ const studentits_db = require('./studentits/student');
 // Shallow merge using the spread operator all into one fake db.
 let db = {...ladok_db(), ...epok_db(), ...studentits_db()};
 // debug the loaded data
-console.log(db);
+//console.log(db);
 // Auto-create the routes for json-server from our db.
 const router = jsonServer.router(db);
 
