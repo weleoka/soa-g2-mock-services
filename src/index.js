@@ -3,9 +3,9 @@ const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 8080;
 
-const ladok_db = require('./ladok/resultat');
-const epok_db = require('./epok/modul');
-const studentits_db = require('./studentits/student');
+const ladok_db = require('./ladok/results');
+const epok_db = require('./epok/modules');
+const studentits_db = require('./studentits/students');
 
 // Shallow merge using the spread operator all into one fake db.
 let db = {...ladok_db(), ...epok_db(), ...studentits_db()};

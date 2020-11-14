@@ -2,29 +2,29 @@
 const casual = require('casual').sv_SE
 
 module.exports = () => {
-    casual.define('modul', function() {
-        const kod_arr = ["modul1", "modul2", "modul3"];
+    casual.define('modules', function(i) {
+        const code_arr = ["modul01", "modul02", "modul03", "modul04",  "modul05", "modul06", "modul07", "modul08", "modul09", "modul10"];
         const description_arr = ["Inlämningsuppgifter", "Tentamen", "Muntlig tentamen"];
         const status_arr = ["aktiv", "inaktiv_avslutad", "inaktiv_framtida"];
 
-        const kod = kod_arr[Math.floor(Math.random() * kod_arr.length)];
+        const code = code_arr[i];
         const description = description_arr[Math.floor(Math.random() * description_arr.length)];
         const status = status_arr[Math.floor(Math.random() * status_arr.length)];
 
         return {
-            kod: kod,
+            code: code,
             description: description,
             status: status,
         }
     })
 
     const data = {
-        modul: [],
+        modules: [],
     }
 
     // Create 10 results
     for (let i = 0; i < 10; i++) {
-        data.modul.push(casual.modul)
+        data.modules.push(casual.modules(i))
     }
 
     return data
