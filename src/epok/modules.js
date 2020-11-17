@@ -3,7 +3,7 @@ const casual = require('casual').sv_SE
 
 module.exports = () => {
     casual.define('modules', function(i) {
-        const code_arr = ["modul01", "modul02", "modul03", "modul04",  "modul05", "modul06", "modul07", "modul08", "modul09", "modul10"];
+        const code_arr = ["module01", "module02", "module03", "module04",  "module05", "module06", "module07", "module08", "module09", "module10"];
         const description_arr = ["Inlämningsuppgifter", "Tentamen", "Muntlig tentamen"];
         const status_arr = ["aktiv", "inaktiv_avslutad", "inaktiv_framtida"];
 

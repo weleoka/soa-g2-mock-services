@@ -6,11 +6,12 @@ const port = process.env.PORT || 8080;
 const ladok_db = require('./ladok/results');
 const epok_db = require('./epok/modules');
 const studentits_db = require('./studentits/students');
+const canvas_db = require('./canvas/assignments');
 
-// Shallow merge using the spread operator all into one fake db.
-let db = {...ladok_db(), ...epok_db(), ...studentits_db()};
+// Shallow merge using the spread operator all into one happy fake db.
+let db = {...ladok_db(), ...epok_db(), ...studentits_db(), ...canvas_db()};
 // debug the loaded data
-//console.log(db);
+console.log(canvas_db());
 // Auto-create the routes for json-server from our db.
 const router = jsonServer.router(db);
 
@@ -18,7 +19,8 @@ const router = jsonServer.router(db);
 server.use(jsonServer.rewriter({
     "/ladok/*": "/$1",
     "/epok/*": "/$1",
-    "/studentits/*": "/$1"
+    "/studentits/*": "/$1",
+    "/canvas/*": "/$1"
 }))
 
 server.use(jsonServer.bodyParser);
