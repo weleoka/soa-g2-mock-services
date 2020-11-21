@@ -3,6 +3,7 @@ const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 
 const port = process.env.PORT || 8080;
+const artificialDelay = 700; // miliseconds
 
 const ladokDb = require('./ladok/results');
 const epokDb = require('./epok/modules');
@@ -17,7 +18,7 @@ let db = {...ladokDb(), ...epokDb(), ...studentitsDb(), ...canvasDb()};
 const router = jsonServer.router(db);
 
 server.use(function(req, res, next){
-  setTimeout(next, 700); // Artificial latency delay to all responses
+  setTimeout(next, artificialDelay);
 });
 
 // https://github.com/typicode/json-server/#rewriter-example
@@ -84,5 +85,6 @@ server.post('/resultat', (request, response) => {
 
 
 server.listen(port, () => {
-    console.log('JSON Server is running')
+    console.log("Using artificial delay (ms): " + artificialDelay);
+    console.log("JSON Server is running");
 })
