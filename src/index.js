@@ -3,15 +3,15 @@ const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 8080;
 
-const ladok_db = require('./ladok/results');
-const epok_db = require('./epok/modules');
-const studentits_db = require('./studentits/students');
-const canvas_db = require('./canvas/assignments');
+const ladokDb = require('./ladok/results');
+const epokDb = require('./epok/modules');
+const studentitsDb = require('./studentits/students');
+const canvasDb = require('./canvas/assignments');
 
 // Shallow merge using the spread operator all into one happy fake db.
-let db = {...ladok_db(), ...epok_db(), ...studentits_db(), ...canvas_db()};
+let db = {...ladokDb(), ...epokDb(), ...studentitsDb(), ...canvasDb()};
 // debug the loaded data
-console.log(canvas_db());
+//console.log(canvasDb());
 // Auto-create the routes for json-server from our db.
 const router = jsonServer.router(db);
 
