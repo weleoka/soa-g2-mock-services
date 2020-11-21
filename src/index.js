@@ -1,6 +1,7 @@
 const jsonServer = require('json-server');
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
+
 const port = process.env.PORT || 8080;
 
 const ladokDb = require('./ladok/results');
@@ -14,6 +15,10 @@ let db = {...ladokDb(), ...epokDb(), ...studentitsDb(), ...canvasDb()};
 //console.log(canvasDb());
 // Auto-create the routes for json-server from our db.
 const router = jsonServer.router(db);
+
+server.use(function(req, res, next){
+  setTimeout(next, 700); // Artificial latency delay to all responses
+});
 
 // https://github.com/typicode/json-server/#rewriter-example
 server.use(jsonServer.rewriter({
