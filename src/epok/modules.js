@@ -3,16 +3,19 @@ const casual = require('casual').sv_SE
 
 module.exports = () => {
     casual.define('modules', function(i) {
-        const code_arr = ["module01", "module02", "module03", "module04",  "module05", "module06", "module07", "module08", "module09", "module10"];
-        const description_arr = ["Inlämningsuppgifter", "Tentamen", "Muntlig tentamen"];
-        const status_arr = ["aktiv", "inaktiv_avslutad", "inaktiv_framtida"];
+        const moduleIdArr = ["module01", "module02", "module03", "module04",  "module05", "module06", "module07", "module08", "module09", "module10"];
+        const courseCodeArr = [ "D0021E", "D0022E", "D0023E"];
+        const descriptionArr = ["Inlämningsuppgifter", "Tentamen", "Muntlig tentamen"];
+        const statusArr = ["aktiv", "inaktiv_avslutad", "inaktiv_framtida"];
 
-        const code = code_arr[i];
-        const description = description_arr[Math.floor(Math.random() * description_arr.length)];
-        const status = status_arr[Math.floor(Math.random() * status_arr.length)];
+        const moduleId = moduleIdArr[i];
+        const courseCode = courseCodeArr[Math.floor(Math.random() * courseCodeArr.length)];
+        const description = descriptionArr[Math.floor(Math.random() * descriptionArr.length)];
+        const status = statusArr[Math.floor(Math.random() * statusArr.length)];
 
         return {
-            code: code,
+            code: moduleId, // todo the object attribute should be named module_id
+            course_code: courseCode, 
             description: description,
             status: status,
         }
