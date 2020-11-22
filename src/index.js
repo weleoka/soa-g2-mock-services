@@ -5,13 +5,23 @@ const middlewares = jsonServer.defaults();
 const port = process.env.PORT || 8080;
 const artificialDelay = 700; // miliseconds
 
-const ladokDb = require('./ladok/results');
-const epokDb = require('./epok/modules');
-const studentitsDb = require('./studentits/students');
-const canvasDb = require('./canvas/assignments');
+const ladokFaker = require('./ladok/results');
+const epokFaker = require('./epok/modules');
+const studentitsFaker = require('./studentits/students');
+const canvasFaker = require('./canvas/assignments');
+
+// Make the student data:
+studentitsDb = studentitsFaker();
+// Extract only valid ssn and student_id from StudentITSdb
+const ssnArr = studentitsDb.students.map(student => student.ssn);
+const studentIdArr = studentitsDb.students.map(student => student.student_id);
+// Build other databases with relevant info
+ladokDb = ladokFaker(ssnArr);
+epokDb = epokFaker();
+canvasDb = canvasFaker(studentIdArr);
 
 // Shallow merge using the spread operator all into one happy fake db.
-let db = {...ladokDb(), ...epokDb(), ...studentitsDb(), ...canvasDb()};
+let db = {...ladokDb, ...epokDb, ...studentitsDb, ...canvasDb};
 // debug the loaded data
 //console.log(canvasDb());
 // Auto-create the routes for json-server from our db.

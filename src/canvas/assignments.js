@@ -1,10 +1,11 @@
 // Use casual with locale set to Swedish
 const casual = require('casual').sv_SE
 
-module.exports = () => {
-    casual.define('assignments', function(i) {
+module.exports = (studentIdArrEx) => {
+    casual.define('assignments', function(i, studentIdArrEx) {
         const assignmentIdArr = ["assignmt01", "assignmt02", "assignmt03", "assignmt04",  "assignmt05", "assignmt06", "assignmt07", "assignmt08", "assignmt09", "assignmt10"];
-        const studentIdArr = ["ingand-4", "tompet-8", "amwi-7"];
+        //const studentIdArr = ["ingand-4", "tompet-8", "amwi-7"];
+        const studentIdArr = studentIdArrEx;
         const gradeArr = [ "U", "G", "VG"];
         const moduleIdArr = ["module01", "module02", "module03", "module04",  "module05", "module06", "module07", "module08", "module09", "module10"];
         const teacherIdArr = ["teacherA", "teacherB", "teacherC"];
@@ -31,7 +32,7 @@ module.exports = () => {
 
     // Create 10 results
     for (let i = 0; i < 10; i++) {
-        data.assignments.push(casual.assignments(i))
+        data.assignments.push(casual.assignments(i, studentIdArrEx))
     }
 
     return data

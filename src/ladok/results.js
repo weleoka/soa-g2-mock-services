@@ -1,9 +1,10 @@
 // USe casual with locale set to Swedish
 const casual = require('casual').sv_SE
 
-module.exports = () => {
-    casual.define('results', function() {
-        const ssnArr = [ "19890812-1234", "19900912-4321", "19911012-7890"];
+module.exports = (ssnArrEx) => {
+    casual.define('results', function(ssnArrEx) {
+        //const ssnArr = [ "19890812-1234", "19900912-4321", "19911012-7890"];
+        const ssnArr = ssnArrEx
         const courseCodeArr = [ "D0021E", "D0022E", "D0023E"];
         const moduleIdArr = [ "module01", "module02", "module03"];
         const gradeArr = [ "U", "G", "VG"];
@@ -29,7 +30,7 @@ module.exports = () => {
 
     // Create 10 results
     for (let i = 0; i < 10; i++) {
-        data.results.push(casual.results)
+        data.results.push(casual.results(ssnArrEx))
     }
 
     return data
