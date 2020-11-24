@@ -14,7 +14,8 @@ module.exports = () => {
         const status = statusArr[Math.floor(Math.random() * statusArr.length)];
 
         return {
-            code: moduleId, // todo the object attribute should be named module_id
+            code: moduleId, // Legacy: use module_id
+            module_id: moduleId,
             course_code: courseCode, 
             description: description,
             status: status,

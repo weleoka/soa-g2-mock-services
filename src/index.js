@@ -2,7 +2,7 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const middlewares = jsonServer.defaults();
 
-const port = process.env.PORT || 8080;
+const port = process.env.NODEMOCK_PORT || 8282;
 const artificialDelay = 700; // miliseconds
 
 const ladokFaker = require('./ladok/results');
@@ -94,7 +94,9 @@ server.post('/resultat', (request, response) => {
 })*/
 
 
-server.listen(port, () => {
+server.listen(port, "0.0.0.0", () => { 
     console.log("Using artificial delay (ms): " + artificialDelay);
-    console.log("JSON Server is running");
+    console.log("JSON Server is running on port: " + port);
 })
+
+//console.log("ASDFASFA" + server.address());
