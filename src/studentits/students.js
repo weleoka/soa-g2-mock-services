@@ -29,7 +29,7 @@ module.exports = () => {
         students: [],
     }
     
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 9; i++) {
         data.students.push(casual.students(i))
     }
 
