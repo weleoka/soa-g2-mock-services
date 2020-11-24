@@ -7,13 +7,13 @@ module.exports = (studentIdArrEx) => {
         //const studentIdArr = ["ingand-4", "tompet-8", "amwi-7"];
         const studentIdArr = studentIdArrEx;
         const gradeArr = [ "U", "G", "VG"];
-        const moduleIdArr = ["module01", "module02", "module03", "module04",  "module05", "module06", "module07", "module08", "module09", "module10"];
+        const moduleIdArr = ["module01", "module02", "module03", "module04",  "module05", "module06"];
         const teacherIdArr = ["teacherA", "teacherB", "teacherC"];
 
         const assignmentId = assignmentIdArr[i];
         const studentId = studentIdArr[Math.floor(Math.random() * studentIdArr.length)];
         const grade = gradeArr[Math.floor(Math.random() * gradeArr.length)];
-        const moduleId = moduleIdArr[i];
+        const moduleId = moduleIdArr[Math.floor(Math.random() * moduleIdArr.length)];
         const teacherId = teacherIdArr[Math.floor(Math.random() * teacherIdArr.length)];
 
         return {
@@ -30,9 +30,10 @@ module.exports = (studentIdArrEx) => {
         assignments: [],
     }
 
-    // Create 10 results
-    for (let i = 0; i < 10; i++) {
-        data.assignments.push(casual.assignments(i, studentIdArrEx))
+    // Create 12 results
+    for (let i = 0; i < 12; i++) {
+        const assignmentTmp = casual.assignments(i, studentIdArrEx)
+        data.assignments.push(assignmentTmp)
     }
 
     return data
