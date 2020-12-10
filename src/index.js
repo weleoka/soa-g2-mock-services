@@ -6,7 +6,7 @@ const port = process.env.NODEMOCK_PORT || 8282;
 const artificialDelay = 700; // miliseconds
 
 const ladokFaker = require('./ladok/results');
-const epokFaker = require('./epok/modules');
+const epokFaker = require('./epok/index');
 const studentitsFaker = require('./studentits/students');
 const canvasFaker = require('./canvas/assignments');
 
@@ -17,13 +17,15 @@ const ssnArr = studentitsDb.students.map(student => student.ssn);
 const studentIdArr = studentitsDb.students.map(student => student.student_id);
 // Build other databases with relevant info
 ladokDb = ladokFaker(ssnArr);
-epokDb = epokFaker();
 canvasDb = canvasFaker(studentIdArr);
+// Courses, occasions and modules: see epok/index.js
+epokDb = epokFaker();
+
 
 // Shallow merge using the spread operator all into one happy fake db.
-let db = {...ladokDb, ...epokDb, ...studentitsDb, ...canvasDb};
+let db = {...ladokDb, ...epokDb.courses, ...epokDb.occasions, ...epokDb.modules, ...studentitsDb, ...canvasDb};
 // debug the loaded data
-//console.log(canvasDb());
+//console.log(db);
 // Auto-create the routes for json-server from our db.
 const router = jsonServer.router(db);
 
