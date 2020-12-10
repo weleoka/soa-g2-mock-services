@@ -47,7 +47,7 @@ RUN npm install --quiet
 COPY --chown=node:node ./src/ ./
 
 # This is here for documentation purposes, we map it to whatever port we wish later
-EXPOSE 8080
+EXPOSE 8282
 
 # Run the app directly with Node (not via NPM) so SIGTERM and SIGKILL works
 CMD ["node", "index.js"]

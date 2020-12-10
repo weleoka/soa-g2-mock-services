@@ -6,22 +6,20 @@ See the API specifications for details on routes and resources. What we can say 
 `localhost:8282/modul` is identical to `localhost:8282/epok/modul`.
 
 
-
 # Docker perticulars/perculiarities
 The following section looks at how the Docker build process is optimised.
 
-## NPM package.json and package-lock.json
+## NPM package.json package-lock.json and node_modules
 The files `package.json` and `package-lock.json` are copied into the image before the project files as this way the Docker layer caching will work. If none of the dependencies have changed then `npm install` will not have to run.  
 
 Due to the one way nature of the Dockerfile build process the resulting `package-lock.json` will not be saved to host. It's recommended after building the image to copy the file from container to host using `docker cp nodemocks:/home/node/app/package-lock.json ./`. See more in the Todo note below.
 
+See note below on `node_modules` folder.
+
 ## NPM node_modules folder and saving on downloads
-The build and running process of the container will mean that the node dependencies will only exist in a layer of the docker build cache. In order for not all the dependencies to be re-downloaded when package.json changes we should copy out the `./node_modules` (after `npm install`) directory to host. On subsequent builds this directory can be copied into the image, and only the dependencies which have changed will be replaed. The command for doing this after a successfull image build process and container running is: `docker cp nodemocks:/home/node/app/node_modules ./`. See more in the Todo note below.
+The build and running process of the container will mean that the node dependencies will usually only exist in a layer of the docker build cache. In order for not all the dependencies to be re-downloaded when package.json changes we should copy out the `./node_modules` (after `npm install`) and save to host. On subsequent builds this directory can be copied into the image, thus only the dependencies which have changed will be replaced.
 
-This section is also the reason why `node_modules` is allowed in repository but not it's contents. This will allow the Dockerfile build process not to fail.
-
-## Todo: volumes, named volumes and saving data to host from the build process
-alternative would perhaps be to run the container with a volume, however as these are mounted after the build process they will blank out the relevant files/folders in the container. There is the possibility to exploit the mounting order of volumes Vs. named volumes and thus get the files back to host in a hacked way. Currently the solution is to manually run the suggested commands and save the `package-lock.json` or `/node_modules` to the project repository that way. Note that only `package-lock.json` is tracked by VCS, not the `/node_modules` folder of course.
+Due to this being done with volumes the easiest and best way is with the wrapper/parent repo's docker-compose.yml. Run the service `docker-compose up --build nodemocks` and it will take care of saving the node_modules to host. The first time running you would have to create the `node_modules` folder in the `soa-g2-mock-services` repository.
 
 
 # Main dependencies
