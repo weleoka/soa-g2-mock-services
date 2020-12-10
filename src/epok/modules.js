@@ -14,7 +14,8 @@ module.exports = () => {
         return {
             module_code: moduleCode, 
             module_id: moduleCode, // Legacy: use module_code
-            //course_code: courseCode, // Legacy. This is now moved to occasions.
+            course_code: String, // set externally
+            occasion_code: String, // set externally
             description: description,
             status: status,
         }
@@ -24,7 +25,6 @@ module.exports = () => {
         modules: [],
     }
 
-    // Create 6 results
     for (let i = 0; i < 6; i++) {
         data.modules.push(casual.modules(i))
     }

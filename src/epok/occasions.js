@@ -3,8 +3,8 @@ const casual = require('casual').sv_SE
 
 module.exports = () => {
     casual.define('occasions', function(i) {
-        const occasionCodeArr = [ "tillfälle01", "tillfälle02", "tillfälle03"];
-        const periodCodeArr = ["HT2020LP1", "HT2020LP2", "VT2021LP4"];
+        const occasionCodeArr = ["tillfälle01", "tillfälle02", "tillfälle03", "tillfälle04", "tillfälle05", "tillfälle06"];
+        const periodCodeArr = ["HT2020LP1", "HT2020LP2", "VT2021LP3", "VT2021LP4"];
         const locationArr = ["distans", "campus", "campus"];
 
         const occasionCode = occasionCodeArr[i];
@@ -16,7 +16,6 @@ module.exports = () => {
             course_code: String, // set externally
             period_code: periodCode,
             location: location,
-            
         }
     })
 
@@ -24,7 +23,6 @@ module.exports = () => {
         occasions: [],
     }
 
-    // Create 6 results
     for (let i = 0; i < 6; i++) {
         data.occasions.push(casual.occasions(i))
     }

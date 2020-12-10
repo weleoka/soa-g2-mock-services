@@ -10,23 +10,27 @@ const epokFaker = require('./epok/index');
 const studentitsFaker = require('./studentits/students');
 const canvasFaker = require('./canvas/assignments');
 
-// Make the student data:
+// Make the student data
 studentitsDb = studentitsFaker();
-// Extract only valid ssn and student_id from StudentITSdb
-const ssnArr = studentitsDb.students.map(student => student.ssn);
-const studentIdArr = studentitsDb.students.map(student => student.student_id);
-// Build other databases with relevant info
-ladokDb = ladokFaker(ssnArr);
-canvasDb = canvasFaker(studentIdArr);
-// Courses, occasions and modules: see epok/index.js
+// Make the course, occasion and module data
 epokDb = epokFaker();
+// Extract the cc and mc tuples needed for other databases
+const epokDataArr = epokDb.modules.map(mod => {return {cc: mod.course_code, mc: mod.module_code}})
+
+// Use student and epok data to build Canvas results
+const studentIdArr = studentitsDb.students.map(student => student.student_id);
+canvasDb = canvasFaker(studentIdArr, epokDataArr);
+
+// Use the student and epok data to build Ladok results
+const ssnArr = studentitsDb.students.map(student => student.ssn);
+ladokDb = ladokFaker(ssnArr, epokDataArr);
 
 
-// Shallow merge using the spread operator all into one happy fake db.
-let db = {...ladokDb, ...epokDb.courses, ...epokDb.occasions, ...epokDb.modules, ...studentitsDb, ...canvasDb};
+// Shallow merge using the spread operator all into one happy fake db
+let db = {...ladokDb, ...epokDb, ...studentitsDb, ...canvasDb};
 // debug the loaded data
 //console.log(db);
-// Auto-create the routes for json-server from our db.
+// Auto-create the routes for json-server from the db
 const router = jsonServer.router(db);
 
 server.use(function(req, res, next){
@@ -44,6 +48,13 @@ server.use(jsonServer.rewriter({
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 server.use(router);
+
+server.listen(port, "0.0.0.0", () => { 
+    console.log("Using artificial delay (ms): " + artificialDelay);
+    console.log("JSON Server is running on port: " + port);
+})
+//console.log("Server address: " + server.address());
+
 
 
 /* // The following are custom implementations of routes as examples.
@@ -94,11 +105,3 @@ server.post('/resultat', (request, response) => {
         response.status(200)
     }
 })*/
-
-
-server.listen(port, "0.0.0.0", () => { 
-    console.log("Using artificial delay (ms): " + artificialDelay);
-    console.log("JSON Server is running on port: " + port);
-})
-
-//console.log("ASDFASFA" + server.address());

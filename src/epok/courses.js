@@ -4,10 +4,10 @@ const casual = require('casual').sv_SE
 module.exports = () => {
     casual.define('courses', function(i) {
         const courseCodeArr = [ "D0021E", "D0022E", "D0023E"];
-        const descriptionArr = ["Inlämningsuppgifter", "Tentamen", "Muntlig tentamen"];
-        const statusArr = ["aktiv", "inaktiv_avslutad", "inaktiv_framtida"];
+        const descriptionArr = ["Design av IT", "Databaser 1", "Java 2"];
+        const statusArr = ["na1", "na2", "na3"];
 
-        const courseCode = courseCodeArr[Math.floor(Math.random() * courseCodeArr.length)];
+        const courseCode = courseCodeArr[i];
         const description = descriptionArr[Math.floor(Math.random() * descriptionArr.length)];
         const status = statusArr[Math.floor(Math.random() * statusArr.length)];
 
@@ -24,7 +24,6 @@ module.exports = () => {
         courses: [],
     }
 
-    // Create 6 results
     for (let i = 0; i < 3; i++) {
         data.courses.push(casual.courses(i))
     }
