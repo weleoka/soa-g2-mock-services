@@ -7,6 +7,7 @@ const artificialDelay = 700; // miliseconds
 
 const ladokFaker = require('./ladok/results');
 const epokFaker = require('./epok/index');
+const timeeditFaker = require('./timeedit/schedules');
 const studentitsFaker = require('./studentits/students');
 const canvasFaker = require('./canvas/assignments');
 
@@ -25,11 +26,14 @@ canvasDb = canvasFaker(studentIdArr, epokDataArr);
 const ssnArr = studentitsDb.students.map(student => student.ssn);
 ladokDb = ladokFaker(ssnArr, epokDataArr);
 
+// Use epok occasion data to build schedules
+const epokOccasionCodes = epokDb.occasions.map(occ => occ.occasion_code)
+timeeditDb = timeeditFaker(epokOccasionCodes);
 
 // Shallow merge using the spread operator all into one happy fake db
-let db = {...ladokDb, ...epokDb, ...studentitsDb, ...canvasDb};
-// debug the loaded data
+let db = {...ladokDb, ...epokDb, ...studentitsDb, ...canvasDb, ...timeeditDb};
 //console.log(db);
+
 // Auto-create the routes for json-server from the db
 const router = jsonServer.router(db);
 
