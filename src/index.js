@@ -7,7 +7,7 @@ const artificialDelay = 700; // miliseconds
 
 const ladokFaker = require('./ladok/results');
 const epokFaker = require('./epok/index');
-const timeeditFaker = require('./timeedit/schedules');
+const timeeditFaker = require('./timeedit/index');
 const studentitsFaker = require('./studentits/students');
 const canvasFaker = require('./canvas/assignments');
 

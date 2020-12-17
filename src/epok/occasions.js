@@ -1,6 +1,7 @@
 // Use casual with locale set to Swedish
 const casual = require('casual').sv_SE
 
+
 module.exports = () => {
     casual.define('occasions', function(i) {
         const occasionCodeArr = ["tillfalle01", "tillfalle02", "tillfalle03", "tillfalle04", "tillfalle05", "tillfalle06"];
