@@ -32,7 +32,7 @@ timeeditDb = timeeditFaker(epokOccasionCodes);
 
 // Shallow merge using the spread operator all into one happy fake db
 let db = {...ladokDb, ...epokDb, ...studentitsDb, ...canvasDb, ...timeeditDb};
-//console.log(db);
+console.log(db);
 
 // Auto-create the routes for json-server from the db
 const router = jsonServer.router(db);
@@ -46,7 +46,9 @@ server.use(jsonServer.rewriter({
     "/ladok/*": "/$1",
     "/epok/*": "/$1",
     "/studentits/*": "/$1",
-    "/canvas/*": "/$1"
+    "/canvas/*": "/$1",
+    //http://localhost:8282/api/schedule/occasion/15
+    "/api/schedule/occasion/*": "/$1",
 }))
 
 server.use(jsonServer.bodyParser);

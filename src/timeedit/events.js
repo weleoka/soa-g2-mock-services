@@ -21,7 +21,7 @@ module.exports = () => {
         events: [],
     }
     
-    for (let i = 0; i < 85; i++) { // 85 lessons
+    for (let i = 0; i < 2; i++) { // 85 lessons
         data.events.push(casual.events(i))
     }
 

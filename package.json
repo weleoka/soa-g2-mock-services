@@ -1,5 +1,5 @@
 {
-  "name": "g2s_mock_services",
+  "name": "soa-g2-mock-services",
   "version": "1.0.0",
   "description": "Mock APIs for development",
   "main": "index.js",
@@ -7,14 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "axios": "^0.21.0",
     "casual": "^1.6.2",
     "json-server": "^0.16.2",
     "uuid": "^8.3.2"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weleoka/g2s_mock_services.git"
+    "url": "git+https://github.com/weleoka/soa-g2-mock-services.git"
   },
   "keywords": [
     "nodejs",
@@ -26,7 +25,7 @@
   "author": "Kai Weeks",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/weleoka/g2s_mock_services/issues"
+    "url": "https://github.com/weleoka/soa-g2-mock-services/issues"
   },
-  "homepage": "https://github.com/weleoka/g2s_mock_services#readme"
+  "homepage": "https://github.com/weleoka/soa-g2-mock-services#readme"
 }
